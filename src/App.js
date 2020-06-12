@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Admin, Resource, GET_LIST } from 'react-admin';
 import get from 'lodash/get';
-// import buildGraphQLProvider from '@ra-data-prisma/dataprovider'
+import buildGraphQLProvider from '@ra-data-prisma/dataprovider'
 
 import buildPrismaProvider, { buildQuery } from 'ra-data-opencrud';
 import overridenQueries from './queries';
@@ -40,7 +40,7 @@ class App extends Component {
 
     return (
       <Admin title="Prisma e-commerce" dataProvider={dataProvider}>
-        <Resource name="Product" list={ProductList} />
+        {/*<Resource name="Product" list={ProductList} />*/}
 
         <Resource
           name="Category"
