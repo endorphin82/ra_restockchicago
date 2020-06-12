@@ -1,8 +1,7 @@
 import React from 'react'
 
-const UrlField = ({ record = {}, source }) =>
+export const UrlField = ({ record = {}, source }) =>
   <a href={record[source]}>
     {record[source]}
-  </a>;
+  </a>
 
-export default UrlField;
