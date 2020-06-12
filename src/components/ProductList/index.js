@@ -1,9 +1,9 @@
 import React from 'react'
 import { List, Datagrid, TextField, EditButton } from 'react-admin'
-import UrlField from '../UrlField'
-import ProductFilter from '../ProductFilter'
+// import { UrlField } from '../UrlField'
+import { ProductFilter } from '../ProductFilter'
 
-const ProductList = (props) => {
+export const ProductList = (props) => {
   return (
     <List filters={ProductFilter} {...props}>
       <Datagrid>
@@ -11,11 +11,9 @@ const ProductList = (props) => {
         <TextField source="name"/>
         <TextField source="description"/>
         <TextField source="price"/>
-        <UrlField source="url" />
-        <EditButton />
+        {/*<UrlField source="url"/>*/}
+        <EditButton/>
       </Datagrid>
     </List>
   )
 }
-
-export default ProductList
