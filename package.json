@@ -11,7 +11,8 @@
     "graphql-tag": "^2.10.3",
     "lodash": "^4.17.15",
     "pluralize": "^8.0.0",
-    "ra-data-graphql": "^3.5.5",    "ra-data-opencrud": "0.0.7",
+    "ra-data-graphql": "^3.5.5",
+    "ra-data-opencrud": "0.0.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
