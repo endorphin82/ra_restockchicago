@@ -3,8 +3,8 @@ import { Admin, Resource } from 'react-admin'
 import buildGraphQLProvider from '@ra-data-prisma/dataprovider'
 
 import './App.css'
-import { ProductList } from './components/ProductList'
-import { CategoryList } from './components/CategoryList'
+import { ProductCreate, ProductEdit, ProductList } from './components/Product'
+import { CategoryList } from './components/Category'
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +22,6 @@ class App extends Component {
 
   render() {
     const { dataProvider } = this.state
-
     if (!dataProvider) {
       return <div>Loading</div>
     }
@@ -31,7 +30,9 @@ class App extends Component {
       <Admin title="Prisma e-commerce" dataProvider={dataProvider}>
         <Resource
           name="Product"
-          list={ProductList}/>
+          list={ProductList} create={ProductCreate}
+          edit={ProductEdit}
+        />
 
         <Resource
           name="Category"
