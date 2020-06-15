@@ -11,6 +11,14 @@ export default {
             url
             icon
             price
+            category{
+                id
+                name
+                parent
+                url
+                description
+                icon
+            }
         }
     `
   },
@@ -23,6 +31,14 @@ export default {
             url
             description
             icon
+            products {
+                id
+                name
+                url
+                description
+                icon
+                price
+            }
         }
     `
   }
