@@ -5,12 +5,13 @@ import { ProductFilter } from '../ProductFilter'
 
 export const ProductList = (props) => {
   return (
-    <List filters={ProductFilter} {...props}>
+    // <List filters={ProductFilter} {...props}>
+    <List {...props}>
       <Datagrid>
         <TextField source="id"/>
         <TextField source="name"/>
         <TextField source="description"/>
-        <TextField source="price"/>
+        {/*<TextField source="price"/>*/}
         {/*<UrlField source="url"/>*/}
         <EditButton/>
       </Datagrid>
