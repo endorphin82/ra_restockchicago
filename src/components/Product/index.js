@@ -41,7 +41,7 @@ export const ProductList = (props) => {
 
 export const ProductEdit = (props) => {
   // Костыль https://github.com/panter/ra-data-prisma/issues/19
-  return <Edit {...{ ...props, id: +props.id }}>
+  return <Edit title="Edit product" {...{ ...props, id: +props.id } }>
     <SimpleForm>
       <TextInput disabled source="id"/>
       <TextInput source="name"/>
