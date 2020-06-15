@@ -10,9 +10,27 @@ import {
   SelectInput,
   TextInput,
   Create,
-  Edit
+  Edit, ReferenceField
 } from 'react-admin'
+import { BrandLinkField } from '../../prisma-ecommerce/src/components/refFields'
+import get from 'lodash/get'
 // import { UrlField } from '../UrlField'
+
+const getIdPath = (source) => {
+  const splitSource = source.split('.');
+
+  if (splitSource.length === 1) {
+    return splitSource;
+  }
+
+  splitSource[splitSource.length - 1] = 'id';
+
+  return splitSource.join('.');
+};
+
+export const CategoryLinkField = ({ source, record }) => (
+  <a href={`Category/${get(record, getIdPath(source))}`}>{get(record, source)}</a>
+);
 
 export const ProductFilter = (props) => (
   <Filter {...props}>
@@ -26,12 +44,17 @@ export const ProductFilter = (props) => (
 export const ProductList = (props) => {
   return (
     // <List filters={ProductFilter} {...props}>
-    <List {...props}>
+    <List {...{ ...props, id: +props.id } }>
       <Datagrid>
         <TextField source="id"/>
         <TextField source="name"/>
         <TextField source="description"/>
         <TextField source="price"/>
+        <TextField source="category"/>
+        {/*<ReferenceField label="Category" source="category.id" reference="categories">*/}
+        {/*  <TextField source="name" />*/}
+        {/*</ReferenceField>*/}
+
         {/*<UrlField source="url"/>*/}
         <EditButton/>
       </Datagrid>
