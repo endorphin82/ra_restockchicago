@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Admin, Resource, EditGuesser, ListGuesser } from 'react-admin'
+import { Admin, Resource } from 'react-admin'
 import buildGraphQLProvider from '@ra-data-prisma/dataprovider'
-
+import CategoryIcon from '@material-ui/icons/Category';
 import './App.css'
 import { ProductCreate, ProductEdit, ProductList } from './components/Product'
 import { CategoryEdit, CategoryList } from './components/Category'
@@ -38,6 +38,7 @@ class App extends Component {
           name="Category"
           list={CategoryList}
           edit={CategoryEdit}
+          icon={CategoryIcon}
         />
 
       </Admin>
