@@ -11,7 +11,8 @@ export default {
             url
             icon
             price
-            images{
+            category_id
+            images {
                 id
                 url
             }
@@ -55,6 +56,15 @@ export default {
         fragment imageProd on ImageProd {
             id
             url
+            product_id
+            product {
+                id
+                name
+                description
+                url
+                icon
+                price
+            }
         }
     `
   },
@@ -63,6 +73,15 @@ export default {
         fragment imageCat on ImageCat {
             id
             url
+            category_id
+            category {
+                id
+                name
+                parent
+                url
+                description
+                icon
+            }
         }
     `
   }

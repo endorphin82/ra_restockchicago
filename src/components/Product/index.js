@@ -1,4 +1,4 @@
-import React, { useDebugValue } from 'react'
+import React from 'react'
 import {
   SimpleForm,
   List,
@@ -7,6 +7,7 @@ import {
   EditButton,
   Filter,
   NumberField,
+  NumberInput,
   ReferenceInput,
   SelectInput,
   TextInput,
@@ -15,7 +16,6 @@ import {
   ArrayInput,
   SimpleFormIterator
 } from 'react-admin'
-import { BrandLinkField } from '../../prisma-ecommerce/src/components/refFields'
 import get from 'lodash/get'
 import { UrlField } from '../UrlField'
 
@@ -44,12 +44,11 @@ export const ProductFilter = (props) => (
   </Filter>
 )
 
+
 export const ProductList = (props) => {
   return (
     // <List filters={ProductFilter} {...props}>
-    // Костыль https://github.com/panter/ra-data-prisma/issues/19
-    <List {...{ ...props, id: +props.id }}>
-
+    <List {...props}>
       {/*<Datagrid rowClick="edit">*/}
       {/*  <TextField source="id" />*/}
       {/*  <TextField source="name" />*/}
@@ -67,12 +66,12 @@ export const ProductList = (props) => {
         <TextField source="name"/>
         <TextField source="description"/>
         <TextField source="price"/>
-        <TextField source="category"/>
-        {/*<ReferenceField source="category_id" reference="Category">*/}
-        {/*  <TextField source="name" />*/}
-        {/*</ReferenceField>*/}
-
-        {/*<UrlField source="url"/>*/}
+        <TextField source="icon"/>
+        <UrlField source="url"/>
+        <NumberField source="category"/>
+        <ReferenceField source="category_id" reference="Category">
+          <TextField source="name"/>
+        </ReferenceField>
         <EditButton/>
       </Datagrid>
     </List>
@@ -80,22 +79,37 @@ export const ProductList = (props) => {
 }
 
 export const ProductEdit = (props) => {
+
   return (
     // Костыль https://github.com/panter/ra-data-prisma/issues/19
     <Edit title="Edit product" {...{ ...props, id: +props.id }}>
       <SimpleForm>
         <TextInput disabled source="id"/>
         <TextInput source="name"/>
+        <NumberInput source="category"/>
+        <TextInput source="url"/>
         <TextInput source="description"/>
-
-        <ReferenceInput source="category.id" reference="Category">
+        <ReferenceInput source="category_id" reference="Category">
           <SelectInput optionText="name"/>
         </ReferenceInput>
+        <NumberInput source="price"/>
+        <TextInput source="images" label="ids images"/>
+
         <ArrayInput source="images">
           <SimpleFormIterator>
-            <TextInput source="url" />
+            {/*<ReferenceInput reference="ImageProd">*/}
+            <TextInput source="images.url"/>
+            {/*</ReferenceInput>*/}
           </SimpleFormIterator>
         </ArrayInput>
+
+
+        {/*<ArrayInput source="images">*/}
+        {/*  <SimpleFormIterator>*/}
+        {/*    <TextInput source="url" reference="images"/>*/}
+        {/*  </SimpleFormIterator>*/}
+        {/*</ArrayInput>*/}
+
       </SimpleForm>
     </Edit>
   )

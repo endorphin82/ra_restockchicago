@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Admin, Resource } from 'react-admin'
+import { Admin, Resource, EditGuesser, ListGuesser } from 'react-admin'
 import buildGraphQLProvider from '@ra-data-prisma/dataprovider'
 
 import './App.css'
 import { ProductCreate, ProductEdit, ProductList } from './components/Product'
-import { CategoryList } from './components/Category'
+import { CategoryEdit, CategoryList } from './components/Category'
 
 class App extends Component {
   constructor(props) {
@@ -37,6 +37,7 @@ class App extends Component {
         <Resource
           name="Category"
           list={CategoryList}
+          edit={CategoryEdit}
         />
 
       </Admin>
