@@ -11,6 +11,10 @@ export default {
             url
             icon
             price
+            images{
+                id
+                url
+            }
             category{
                 id
                 name
@@ -31,6 +35,10 @@ export default {
             url
             description
             icon
+            images {
+                id
+                url
+            }
             products {
                 id
                 name
@@ -39,6 +47,22 @@ export default {
                 icon
                 price
             }
+        }
+    `
+  },
+  ImageProd: {
+    [GET_LIST]: gql`
+        fragment imageProd on ImageProd {
+            id
+            url
+        }
+    `
+  },
+  ImageCat: {
+    [GET_LIST]: gql`
+        fragment imageCat on ImageCat {
+            id
+            url
         }
     `
   }
