@@ -37,26 +37,18 @@ export const CategoryLinkField = ({ source, record }) => (
 
 export const ProductFilter = (props) => (
   <Filter {...props}>
-    {/*<TextInput label="Search" source="q" alwaysOn/>*/}
+    <TextInput label="Search" source="q" alwaysOn/>
     <ReferenceInput label="Category" source="category_id" reference="Category" allowEmpty>
       <SelectInput optionText="name"/>
     </ReferenceInput>
   </Filter>
 )
 
-
 export const ProductList = (props) => {
   return (
     // <List filters={ProductFilter} {...props}>
-    <List {...props}>
-      {/*<Datagrid rowClick="edit">*/}
-      {/*  <TextField source="id" />*/}
-      {/*  <TextField source="name" />*/}
-      {/*  <NumberField source="category" />*/}
-      {/*  <UrlField source="url" />*/}
-      {/*  <TextField source="description" />*/}
-      {/*  <TextField source="icon" />*/}
-      {/*  <NumberField source="price" />*/}
+    <List filters={<ProductFilter />} {...props}>
+
       {/*  <TextField source="images" />*/}
       {/*    /!*<EditButton/>*!/*/}
       {/*</Datagrid>*/}
@@ -89,6 +81,7 @@ export const ProductEdit = (props) => {
         <NumberInput source="category"/>
         <TextInput source="url"/>
         <TextInput source="description"/>
+        <TextInput source="icon"/>
         <ReferenceInput source="category_id" reference="Category">
           <SelectInput optionText="name"/>
         </ReferenceInput>
@@ -118,9 +111,24 @@ export const ProductEdit = (props) => {
 export const ProductCreate = props => (
   <Create title="Create a product" {...props}>
     <SimpleForm>
+      <TextInput source="id" disabled/>
       <TextInput source="name"/>
+      {/*<NumberInput source="category"/>*/}
+      <TextInput source="url"/>
+      <TextInput source="icon"/>
       <TextInput source="description"/>
-      <TextInput source="price"/>
+      <ReferenceInput source="category_id" reference="Category">
+        <SelectInput optionText="name"/>
+      </ReferenceInput>
+      <NumberInput source="price"/>
+      {/*<TextInput source="images" label="ids images"/>*/}
+
+      {/*<ArrayInput source="images">*/}
+      {/*  <SimpleFormIterator>*/}
+      {/*    <TextInput source="images.url"/>*/}
+      {/*  </SimpleFormIterator>*/}
+      {/*</ArrayInput>*/}
+
     </SimpleForm>
   </Create>
 )
