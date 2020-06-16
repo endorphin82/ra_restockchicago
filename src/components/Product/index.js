@@ -6,31 +6,34 @@ import {
   TextField,
   EditButton,
   Filter,
+  NumberField,
   ReferenceInput,
   SelectInput,
   TextInput,
   Create,
-  Edit, ReferenceField
+  Edit, ReferenceField,
+  ArrayInput,
+  SimpleFormIterator
 } from 'react-admin'
 import { BrandLinkField } from '../../prisma-ecommerce/src/components/refFields'
 import get from 'lodash/get'
-// import { UrlField } from '../UrlField'
+import { UrlField } from '../UrlField'
 
 const getIdPath = (source) => {
-  const splitSource = source.split('.');
+  const splitSource = source.split('.')
 
   if (splitSource.length === 1) {
-    return splitSource;
+    return splitSource
   }
 
-  splitSource[splitSource.length - 1] = 'id';
+  splitSource[splitSource.length - 1] = 'id'
 
-  return splitSource.join('.');
-};
+  return splitSource.join('.')
+}
 
 export const CategoryLinkField = ({ source, record }) => (
   <a href={`Category/${get(record, getIdPath(source))}`}>{get(record, source)}</a>
-);
+)
 
 export const ProductFilter = (props) => (
   <Filter {...props}>
@@ -44,14 +47,28 @@ export const ProductFilter = (props) => (
 export const ProductList = (props) => {
   return (
     // <List filters={ProductFilter} {...props}>
-    <List {...{ ...props, id: +props.id } }>
+    // Костыль https://github.com/panter/ra-data-prisma/issues/19
+    <List {...{ ...props, id: +props.id }}>
+
+      {/*<Datagrid rowClick="edit">*/}
+      {/*  <TextField source="id" />*/}
+      {/*  <TextField source="name" />*/}
+      {/*  <NumberField source="category" />*/}
+      {/*  <UrlField source="url" />*/}
+      {/*  <TextField source="description" />*/}
+      {/*  <TextField source="icon" />*/}
+      {/*  <NumberField source="price" />*/}
+      {/*  <TextField source="images" />*/}
+      {/*    /!*<EditButton/>*!/*/}
+      {/*</Datagrid>*/}
+
       <Datagrid>
         <TextField source="id"/>
         <TextField source="name"/>
         <TextField source="description"/>
         <TextField source="price"/>
         <TextField source="category"/>
-        {/*<ReferenceField label="Category" source="category.id" reference="categories">*/}
+        {/*<ReferenceField source="category_id" reference="Category">*/}
         {/*  <TextField source="name" />*/}
         {/*</ReferenceField>*/}
 
@@ -63,19 +80,25 @@ export const ProductList = (props) => {
 }
 
 export const ProductEdit = (props) => {
-  // Костыль https://github.com/panter/ra-data-prisma/issues/19
-  return <Edit title="Edit product" {...{ ...props, id: +props.id } }>
-    <SimpleForm>
-      <TextInput disabled source="id"/>
-      <TextInput source="name"/>
-      <TextInput source="description"/>
+  return (
+    // Костыль https://github.com/panter/ra-data-prisma/issues/19
+    <Edit title="Edit product" {...{ ...props, id: +props.id }}>
+      <SimpleForm>
+        <TextInput disabled source="id"/>
+        <TextInput source="name"/>
+        <TextInput source="description"/>
 
-      <ReferenceInput source="category.id" reference="Category">
-        <SelectInput optionText="name"/>
-      </ReferenceInput>
-
-    </SimpleForm>
-  </Edit>
+        <ReferenceInput source="category.id" reference="Category">
+          <SelectInput optionText="name"/>
+        </ReferenceInput>
+        <ArrayInput source="images">
+          <SimpleFormIterator>
+            <TextInput source="url" />
+          </SimpleFormIterator>
+        </ArrayInput>
+      </SimpleForm>
+    </Edit>
+  )
 }
 
 export const ProductCreate = props => (
