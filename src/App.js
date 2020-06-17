@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { Admin, Resource } from 'react-admin'
+import { Admin, Resource, ListGuesser, EditGuesser } from 'react-admin'
 import buildGraphQLProvider from '@ra-data-prisma/dataprovider'
-import CategoryIcon from '@material-ui/icons/Category';
+import CategoryIcon from '@material-ui/icons/Category'
 import './App.css'
-import { ProductCreate, ProductEdit, ProductList } from './components/Product'
+import { ProductCreate, ProductEdit, ProductList, ProductShow } from './components/Product'
 import { CategoryEdit, CategoryList } from './components/Category'
+import { ImageprodCreate, ImageprodEdit, ImageprodList } from './components/ImageProd'
 
 class App extends Component {
   constructor(props) {
     super(props)
-
     this.state = { dataProvider: null }
   }
 
@@ -28,19 +28,22 @@ class App extends Component {
 
     return (
       <Admin title="Prisma e-commerce" dataProvider={dataProvider}>
-        <Resource
-          name="Product"
-          list={ProductList} create={ProductCreate}
-          edit={ProductEdit}
+        <Resource name="Product"
+                  list={ProductList}
+                  create={ProductCreate}
+                  edit={ProductEdit}
+                  show={ProductShow}
         />
-
-        <Resource
-          name="Category"
-          list={CategoryList}
-          edit={CategoryEdit}
-          icon={CategoryIcon}
+        <Resource name="Category"
+                  list={CategoryList}
+                  edit={CategoryEdit}
+                  icon={CategoryIcon}
         />
-
+        <Resource name="ImageProd"
+                  list={ImageprodList}
+                  edit={ImageprodEdit}
+                  create={ImageprodCreate}
+        />
       </Admin>
     )
   }
