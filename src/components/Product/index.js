@@ -23,8 +23,9 @@ import get from 'lodash/get'
 import { UrlField } from '../UrlField'
 import Button from '@material-ui/core/Button'
 
-const CreateRelatedImageProdButton = ({ record }) => (
-  <Button
+const CreateRelatedImageProdButton = ({ record }) => {
+  console.log('record', record)
+  return (<Button
     component={Link}
     to={{
       pathname: '/ImageProd/create',
@@ -32,11 +33,11 @@ const CreateRelatedImageProdButton = ({ record }) => (
     }}
   >
     Write a image for that product
-  </Button>
-)
+  </Button>)
+}
+
 const getIdPath = (source) => {
   const splitSource = source.split('.')
-
   if (splitSource.length === 1) {
     return splitSource
   }
